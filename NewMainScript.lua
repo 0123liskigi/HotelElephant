@@ -29,6 +29,7 @@ for _,P in pairs(plyrs:GetPlayers()) do
    game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(UNN))
  task.wait(0.10)
     game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(SixNine))
+                    end
 end)
 
 -- Player
