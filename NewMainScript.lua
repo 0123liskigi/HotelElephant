@@ -14,8 +14,6 @@ local Event = game:GetService("ReplicatedStorage").MoneyRequest
 end)
 
 MainSection:NewButton("Inf Money For Everyone (Including You)", "Gives You Alot Of Money For Everyone!", function()
-    local A_1 = false
-local A_2 = MainSection:NewButton("Inf Money", "Gives You Alot Of Money.", function()
     local SetMoney = 9223372036854776000
 
 local plyrs = game:GetService("Players")
