@@ -5,7 +5,7 @@ local Window = Library.CreateLib("Hotel Elephant Script By 0123liskigi", "BloodT
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-MainSection:NewButton("Inf Money", "Gives You Alot Of Money.", function()
+MainSection:NewButton("Inf Money For You", "Gives You Alot Of Money.", function()
     local A_1 = false
 local A_2 = 10000000000000000 --- change the value to how many cash you want
 local A_3 = "Cash"
