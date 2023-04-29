@@ -25,10 +25,3 @@ PlayerSection:NewSlider("JumpPower", "lets you jump higher", 350, 50, function(s
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
 end)
 
-PlayerSection:NewButton("Inf Jump", "Basically Jump Infinitely Without Touching Ground Yay Dont Need To Touch Grass...", function()
-    local InfiniteJumpEnabled = true
-game:GetService("UserInputService").JumpRequest:connect(function()
-	if InfiniteJumpEnabled then
-		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-	end
-end)
