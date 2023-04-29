@@ -2,7 +2,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 local Window = Library.CreateLib("Hotel Elepahant Script By 0123liskigi", "Ocean")
 
 --- ToggleUI
-Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.CTRL, function()
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.LeftCTRL, function()
 	Library:ToggleUI()
 end)
 
