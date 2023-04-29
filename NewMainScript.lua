@@ -24,6 +24,18 @@ for _,P in pairs(plyrs:GetPlayers()) do
                     end
 end)
 
+Section:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Section:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
+    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
+end)
+
+Section:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
+    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Jump.txt"))()
+end)
+
 -- Player
 local Player = Window:NewTab("Player")
 local PlayerSection = Player:NewSection("Player")
