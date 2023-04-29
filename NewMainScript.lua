@@ -36,7 +36,7 @@ PlayerSection:NewSlider("JumpPower", "lets you jump higher", 350, 50, function(s
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
 end)
 
--- Other
+-- Blatant
 local Blatant = Window:NewTab("Blatant")
 local BlatantSection = Blatant:NewSection("Blatant")
 
