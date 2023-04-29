@@ -49,5 +49,5 @@ BlatantSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", functi
 end)
 
 BlatantSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
-    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Jump.txt"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/Infinite%20Jump"))()
 end)
