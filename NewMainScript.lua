@@ -13,6 +13,24 @@ local Event = game:GetService("ReplicatedStorage").MoneyRequest
    Event:FireServer(A_1, A_2, A_3)
 end)
 
+MainSection:NewButton("Inf Money For Everyone (Including You)", "Gives You Alot Of Money For Everyone!", function()
+    local A_1 = false
+local A_2 = MainSection:NewButton("Inf Money", "Gives You Alot Of Money.", function()
+    local SetMoney = 9223372036854776000
+
+local plyrs = game:GetService("Players")
+for _,P in pairs(plyrs:GetPlayers()) do
+   local N = {[1] = false, [2] = "inf", [3] = "Cash", [4] = P}
+    local UNN = {[1] = false, [2] = "9223372036854776000", [3] = "Cash", [4] = P}
+    local SixNine = {[1] = false, [2] = SetMoney, [3] = "Cash", [4] = P}
+    
+ game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(N))
+ task.wait(0.10)
+   game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(UNN))
+ task.wait(0.10)
+    game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(SixNine))
+end)
+
 -- Player
 local Player = Window:NewTab("Player")
 local PlayerSection = Player:NewSection("Player")
