@@ -13,18 +13,6 @@ local Event = game:GetService("ReplicatedStorage").MoneyRequest
    Event:FireServer(A_1, A_2, A_3)
 end)
 
-MainSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-end)
-
-MainSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
-    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
-end)
-
-MainSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
-    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Jump.txt"))()
-end)
-
 MainSection:NewButton("Inf Money For Everyone (Including You)", "Gives You Alot Of Money For Everyone!", function()
     local SetMoney = 10000000000000000
 
@@ -46,4 +34,20 @@ end)
 
 PlayerSection:NewSlider("JumpPower", "lets you jump higher", 350, 50, function(s) -- 350 (MaxValue) | 50 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+
+-- Other
+local Other = Window:NewTab("Other")
+local OtherSection = Player:NewSection("Other")
+
+OtherSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+OtherSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
+    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
+end)
+
+OtherSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
+    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Jump.txt"))()
 end)
