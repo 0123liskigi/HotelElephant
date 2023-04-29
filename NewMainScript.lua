@@ -38,7 +38,7 @@ end)
 
 -- Other
 local Other = Window:NewTab("Other")
-local OtherSection = Player:NewSection("Other")
+local OtherSection = Other:NewSection("Other")
 
 OtherSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
