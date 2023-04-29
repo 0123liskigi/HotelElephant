@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Hotel Elephant Script By 0123liskigi", "Ocean")
+local Window = Library.CreateLib("Hotel Elephant Script By 0123liskigi", "BloodTheme")
 
 -- Main
 local Main = Window:NewTab("Main")
