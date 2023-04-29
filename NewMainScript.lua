@@ -37,17 +37,17 @@ PlayerSection:NewSlider("JumpPower", "lets you jump higher", 350, 50, function(s
 end)
 
 -- Other
-local Other = Window:NewTab("Other")
-local OtherSection = Other:NewSection("Other")
+local Blatant = Window:NewTab("Blatant")
+local BlatantSection = Blatant:NewSection("Blatant")
 
-OtherSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
+BlatantSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
 
-OtherSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
+BlatantSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
     loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
 end)
 
-OtherSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
+BlatantSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
     loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Jump.txt"))()
 end)
