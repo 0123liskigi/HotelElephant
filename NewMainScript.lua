@@ -13,17 +13,6 @@ local Event = game:GetService("ReplicatedStorage").MoneyRequest
    Event:FireServer(A_1, A_2, A_3)
 end)
 
-MainSection:NewButton("Inf Money For Everyone (Including You)", "Gives You Alot Of Money For Everyone!", function()
-    local SetMoney = 10000000000000000
-
-local plyrs = game:GetService("Players")
-for _,P in pairs(plyrs:GetPlayers()) do
-    local SixNine = {[1] = false, [2] = SetMoney, [3] = "Cash", [4] = P}
-            
-    game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(SixNine))
-                    end
-end)
-
 MainSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
@@ -34,6 +23,17 @@ end)
 
 MainSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
     loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Jump.txt"))()
+end)
+
+MainSection:NewButton("Inf Money For Everyone (Including You)", "Gives You Alot Of Money For Everyone!", function()
+    local SetMoney = 10000000000000000
+
+local plyrs = game:GetService("Players")
+for _,P in pairs(plyrs:GetPlayers()) do
+    local SixNine = {[1] = false, [2] = SetMoney, [3] = "Cash", [4] = P}
+            
+    game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(SixNine))
+                    end
 end)
 
 -- Player
