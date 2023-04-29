@@ -40,7 +40,7 @@ end)
 local Blatant = Window:NewTab("Blatant")
 local BlatantSection = Blatant:NewSection("Blatant")
 
-BlatantSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
+BlatantSection:NewButton("Loop Inf Money", "You Just Get More Money And It Keep Growing Till 60 Seconds", function()
     while wait do
     local A_1 = false
 local A_2 = 10000000000000000 --- change the value to how many cash you want
