@@ -48,7 +48,6 @@ local A_3 = "Cash"
 local Event = game:GetService("ReplicatedStorage").MoneyRequest
    Event:FireServer(A_1, A_2, A_3)
             wait(0.05)
-            wait(60) then break end
 end)
 
 BlatantSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
