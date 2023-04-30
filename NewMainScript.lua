@@ -40,6 +40,13 @@ end)
 local Blatant = Window:NewTab("Blatant")
 local BlatantSection = Blatant:NewSection("Blatant")
 
+BlatantSection:NewButton("Loop Inf Money 100 Times For Yourself", "Basically Inf Money But Loops", function()
+    local A_1 = false
+local A_2 = 10000000000000000 --- change the value to how many cash you want
+local A_3 = "Cash"
+local Event = game:GetService("ReplicatedStorage").MoneyRequest
+   Event:FireServer(A_1, A_2, A_3)
+end
 
 BlatantSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
