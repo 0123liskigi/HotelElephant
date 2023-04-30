@@ -60,7 +60,7 @@ local plyrs = game:GetService("Players")
 for _,P in pairs(plyrs:GetPlayers()) do
     local SixNine = {[1] = false, [2] = SetMoney, [3] = "Cash", [4] = P}
             
-    game:GetService("ReplicatedStorage").aMoneyRequest:FireServer(unpack(SixNine))
+    game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(SixNine))
                     end
 end
 
