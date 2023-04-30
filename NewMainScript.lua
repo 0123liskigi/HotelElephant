@@ -51,7 +51,7 @@ local Event = game:GetService("ReplicatedStorage").MoneyRequest
 end
 end)
 
-OtherSection:NewButton("Loop Inf Money For Yourself", "LOOP!", function()
+OtherSection:NewButton("Loop Inf Money For Everyone", "LOOP!", function()
         for count = 0, 100, 1 do
     wait(0.05)
 local SetMoney = 10000000000000000
