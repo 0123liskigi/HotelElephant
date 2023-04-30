@@ -36,26 +36,29 @@ PlayerSection:NewSlider("JumpPower", "lets you jump higher", 350, 50, function(s
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
 end)
 
--- Blatant
-local Blatant = Window:NewTab("Blatant")
-local BlatantSection = Blatant:NewSection("Blatant")
+-- Other
+local Other = Window:NewTab("Other")
+local OtherSection = Other:NewSection("Other")
 
-BlatantSection:NewButton("Loop Inf Money 100 Times For Yourself", "Basically Inf Money But Loops", function()
-    local A_1 = false
+OtherSection:NewButton("Loop Inf Money For Yourself", "LOOP!", function()
+    for count = 0, 100, 1 do
+    wait(0.05)
+local A_1 = false
 local A_2 = 10000000000000000 --- change the value to how many cash you want
 local A_3 = "Cash"
 local Event = game:GetService("ReplicatedStorage").MoneyRequest
    Event:FireServer(A_1, A_2, A_3)
 end
+end)
 
-BlatantSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
+OtherSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
 
-BlatantSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
+OtherSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/B-Tools"))()
 end)
 
-BlatantSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass...", function()
+OtherSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/Infinite%20Jump"))()
 end)
