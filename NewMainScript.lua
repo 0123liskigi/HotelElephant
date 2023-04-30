@@ -51,6 +51,19 @@ local Event = game:GetService("ReplicatedStorage").MoneyRequest
 end
 end)
 
+OtherSection:NewButton("Loop Inf Money For Yourself", "LOOP!", function()
+        for count = 0, 100, 1 do
+    wait(0.05)
+local SetMoney = 10000000000000000
+
+local plyrs = game:GetService("Players")
+for _,P in pairs(plyrs:GetPlayers()) do
+    local SixNine = {[1] = false, [2] = SetMoney, [3] = "Cash", [4] = P}
+            
+    game:GetService("ReplicatedStorage").aMoneyRequest:FireServer(unpack(SixNine))
+                    end
+end
+
 OtherSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
