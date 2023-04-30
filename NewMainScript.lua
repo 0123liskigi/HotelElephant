@@ -63,6 +63,7 @@ for _,P in pairs(plyrs:GetPlayers()) do
     game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(SixNine))
                     end
 end
+end)
 
 OtherSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
