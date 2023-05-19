@@ -1,0 +1,11 @@
+local players = getPlayer(target.Text, Players.LocalPlayer)
+ for i, v in pairs(players) do
+  Destroy(Players[v].Character:FindFirstChildOfClass("Humanoid"))
+  repeat wait() until Players[v].Character:FindFirstChildOfClass("Humanoid").Parent == nil
+  for _, v in ipairs(Players[v].Character:GetChildren()) do
+   if v:IsA("BackpackItem") and v:FindFirstChild("Handle") then
+    Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):EquipTool(v)
+   end
+  end
+ end
+end)
