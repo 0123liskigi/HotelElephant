@@ -69,8 +69,12 @@ OtherSection:NewButton("Infinite Yield", "Basically Inf Yield Admin Panel", func
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
 
-OtherSection:NewButton("Btools", "Tools To Destroy The Map Or Modules", function()
+OtherSection:NewButton("Btools", "Tools To Destroy The Map Or Modules FE", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/B-Tools"))()
+end)
+
+OtherSection:NewButton("Stools", "Tools To Uhhh.. Idk", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/S-tools"))()
 end)
 
 OtherSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass", function()
