@@ -1,11 +1,317 @@
-local players = getPlayer(target.Text, Players.LocalPlayer)
- for i, v in pairs(players) do
-  Destroy(Players[v].Character:FindFirstChildOfClass("Humanoid"))
-  repeat wait() until Players[v].Character:FindFirstChildOfClass("Humanoid").Parent == nil
-  for _, v in ipairs(Players[v].Character:GetChildren()) do
-   if v:IsA("BackpackItem") and v:FindFirstChild("Handle") then
-    Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):EquipTool(v)
-   end
-  end
- end
+local Tools = {
+	['Move'] = Instance.new('Tool');
+	['Clone'] = Instance.new('Tool');
+	['Destroy'] = Instance.new('Tool');
+}
+
+Tools['Move'].TextureId = 'rbxassetid://1048129653'; Tools['Clone'].TextureId = 'rbxasset://Textures/Clone.png'; Tools['Destroy'].TextureId = 'http://www.roblox.com/asset/?id=14808588'; for K,V in next, Tools do V['RequiresHandle'] = false end
+
+Tools['Move'].Parent = LP.Backpack
+Tools['Clone'].Parent = LP.Backpack
+Tools['Destroy'].Parent = LP.Backpack
+
+local Delete = function(Obj)
+	game:GetService('ReplicatedStorage').PlayerEvents['e'..LP['UserId']].DestroyItem:FireServer(Obj)
+end
+
+local Place = function(CFrame,Obj)
+	game:GetService('ReplicatedStorage').PlayerEvents['e'..LP['UserId']].PlaceItem:FireServer(CFrame,Obj)
+end
+
+local IgnoreList = {};
+
+for K,V in next, workspace:GetDescendants() do 
+	if V:IsA('Part') or V:IsA('BasePart') then 
+		if rawequal(V['Transparency'],1) then 
+			table.insert(IgnoreList,V)
+		end
+	end
+end
+
+for K,V in next, Char:GetDescendants() do 
+	if V:IsA('Part') or V:IsA('BasePart') then 
+		table.insert(IgnoreList,V)
+	end
+end
+
+workspace.DescendantAdded:Connect(function(Obj)
+	if Obj:IsA('Part') or Obj:IsA('BasePart') then 
+		if rawequal(Obj['Transparency'],1) then 
+			table.insert(IgnoreList,Obj)
+		end
+	end
+end)
+
+local PointInfo = function(X,Y)
+    local RayA = Camera:ScreenPointToRay(X,Y); local RayB = Ray.new(RayA.Origin, RayA.Direction * 1.0e3)
+    local Target, Position = workspace:FindPartOnRayWithIgnoreList(RayB, IgnoreList)
+    return {Target,Position}
+end
+
+Tools['Destroy'].Deactivated:Connect(function()
+	local Obj = PointInfo(Mouse.X,Mouse.Y)[1]
+	Delete(Obj)
+end)
+
+Tools['Clone'].Equipped:Connect(function(Mouse)
+    Mouse.Icon = "rbxasset://textures/CloneCursor.png"
+end)
+
+Tools['Clone'].Unequipped:Connect(function()
+    game.Players.LocalPlayer:GetMouse().Icon = ""
+end)
+
+Tools['Destroy'].Equipped:Connect(function(Mouse)
+    Mouse.Icon = "rbxasset://textures/HammerCursor.png"
+end)
+
+Tools['Destroy'].Unequipped:Connect(function()
+    game.Players.LocalPlayer:GetMouse().Icon = ""
+end)
+
+local Moving;
+Tools['Move'].Activated:Connect(function()
+	Moving = PointInfo(Mouse.X,Mouse.Y)[1]
+	table.insert(IgnoreList,Moving); local ObjInList = #IgnoreList
+	repeat Mouse.Move:Wait()
+		Moving.CFrame = CFrame.new(PointInfo(Mouse.X,Mouse.Y)[2] + Vector3.new(0,Moving.Size.Y/2,0))
+	until #UIS:GetMouseButtonsPressed() < 1
+	IgnoreList[ObjInList] = nil
+end)
+
+Tools['Move'].Deactivated:Connect(function()
+	Delete(Moving); Place(Moving.CFrame,Moving)
+end)
+
+Tools['Clone'].Activated:Connect(function()
+	Moving = PointInfo(Mouse.X,Mouse.Y)[1]
+	wait(.2)
+	table.insert(IgnoreList,Moving); local ObjInList = #IgnoreList
+	if #UIS:GetMouseButtonsPressed() > 0 then
+		repeat game:GetService('RunService').RenderStepped:Wait()
+			Moving.CFrame = CFrame.new(PointInfo(Mouse.X,Mouse.Y)[2] + Vector3.new(0,Moving.Size.Y/2,0))
+		until #UIS:GetMouseButtonsPressed() < 1
+		Place(Moving.CFrame,Moving)
+	else
+		Place(Moving.CFrame + Vector3.new(0,Moving.Size.Y,0), Moving)
+	end
+	IgnoreList[ObjInList] = nil
+end)
+end)
+
+Copy.MouseButton1Click:Connect(function()
+local CopyTool = Instance.new("Tool")
+
+CopyTool.Name = "CopyTool"
+CopyTool.RequiresHandle = false
+CopyTool.Activated:Connect(function()
+game.ReplicatedStorage.PlayerEvents["e"..game.Players.LocalPlayer.UserId].PlaceItem:FireServer(game.Players.LocalPlayer:GetMouse().Target.CFrame+Vector3.new(0,game.Players.LocalPlayer:GetMouse().Target.Size.Y,0),game.Players.LocalPlayer:GetMouse().Target)
+end)
+
+CopyTool.Equipped:Connect(function(Mouse)
+    Mouse.Icon = "rbxasset://textures/CloneCursor.png"
+end)
+
+CopyTool.Unequipped:Connect(function()
+    game.Players.LocalPlayer:GetMouse().Icon = ""
+end)
+
+CopyTool.TextureId = "rbxasset://Textures/Clone.png"
+CopyTool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+Move.MouseButton1Click:Connect(function()
+local MoveTool = Instance.new("Tool")
+
+local Moving
+local Target
+
+MoveTool.Name = "MoveTool"
+MoveTool.RequiresHandle = false
+MoveTool.Activated:Connect(function()
+Moving = true
+Target = game.Players.LocalPlayer:GetMouse().Target
+repeat
+game.Players.LocalPlayer:GetMouse().Move:Wait()
+Target.CFrame = CFrame.new(game.Players.LocalPlayer:GetMouse().Hit.p)
+game.Players.LocalPlayer:GetMouse().TargetFilter = Target
+until Moving == false
+end)
+MoveTool.Deactivated:Connect(function()
+Moving = false
+game.ReplicatedStorage.PlayerEvents["e"..game.Players.LocalPlayer.UserId].DestroyItem:FireServer(Target)
+game.ReplicatedStorage.PlayerEvents["e"..game.Players.LocalPlayer.UserId].PlaceItem:FireServer(Target.CFrame,Target)
+end)
+
+MoveTool.TextureId = "rbxassetid://1048129653"
+MoveTool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+Delete.MouseButton1Click:Connect(function()
+local DeleteTool = Instance.new("Tool")
+
+DeleteTool.Name = "DeleteTool"
+DeleteTool.RequiresHandle = false
+DeleteTool.Activated:Connect(function()
+game.ReplicatedStorage.PlayerEvents["e"..game.Players.LocalPlayer.UserId].DestroyItem:FireServer(game.Players.LocalPlayer:GetMouse().Target)
+end)
+
+DeleteTool.Equipped:Connect(function(Mouse)
+    Mouse.Icon = "rbxasset://textures/HammerCursor.png"
+end)
+
+DeleteTool.Unequipped:Connect(function()
+    game.Players.LocalPlayer:GetMouse().Icon = ""
+end)
+
+DeleteTool.TextureId = "http://www.roblox.com/asset/?id=14808588"
+DeleteTool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+CreateDeadClone.MouseButton1Click:Connect(function()
+Plr = game.Players.LocalPlayer
+Char = Plr.Character
+Head = Char:FindFirstChild("Head")
+Torso = Char:FindFirstChild("Torso")
+L_A = Char:FindFirstChild("Left Arm")
+R_A = Char:FindFirstChild("Right Arm")
+L_L = Char:FindFirstChild("Left Leg")
+local R_L = Char:FindFirstChild("Right Leg")
+Create = game.ReplicatedStorage.PlayerEvents["e"..Plr.UserId].PlaceItem
+
+if Head and Torso and L_A and R_A and L_L and R_L then
+
+    Head.Anchored = true
+    Create:FireServer(Head.CFrame, Head)
+    Create:FireServer(Torso.CFrame, Torso)
+    Create:FireServer(L_A.CFrame, L_A)
+    Create:FireServer(R_A.CFrame, R_A)
+    Create:FireServer(L_L.CFrame, L_L)
+    Create:FireServer(R_L.CFrame, R_L)
+
+		if Torso:FindFirstChild("Neck") then
+			Torso:FindFirstChild("Neck"):Destroy()
+		end
+else
+warn("Missing BasePart!")
+end
+end)
+
+SpamHeadClones.MouseButton1Click:Connect(function()
+GetHumanoid = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+
+function CloneHead()
+CreateX = game.Players.LocalPlayer.Character:FindFirstChild("Head").CFrame.X
+CreateY = game.Players.LocalPlayer.Character:FindFirstChild("Head").CFrame.Y
+CreateZ = game.Players.LocalPlayer.Character:FindFirstChild("Head").CFrame.Z
+Initialize_Coordinates = 
+{
+	Initialize_XCoordinate = 0;
+	Initialize_YCoordinate = 1;
+	Initialize_ZCoordinate = 2
+}
+		Initialize_Coordinates.Initialize_XCoordinate = CreateX
+		Initialize_Coordinates.Initialize_YCoordinate = CreateY
+		Initialize_Coordinates.Initialize_ZCoordinate = CreateZ
+		
+game.ReplicatedStorage.PlayerEvents["e"..game.Players.LocalPlayer.UserId].PlaceItem:FireServer(CFrame.new(Initialize_Coordinates.Initialize_XCoordinate,Initialize_Coordinates.Initialize_YCoordinate,Initialize_Coordinates.Initialize_ZCoordinate),game.Players.LocalPlayer.Character:FindFirstChild("Head"))
+end
+
+function EndSpam()
+Spam:Disconnect()
+end
+
+local Hint = Instance.new("Hint")
+Hint.Text = "Reset to stop"
+spawn(function()
+	wait(3)
+	Hint:Destroy()
+end)
+	
+Spam = game.RunService.Heartbeat:Connect(CloneHead)
+GetHumanoid.Died:Connect(EndSpam)
+end)
+
+SpamLimbClones.MouseButton1Click:Connect(function()
+Plr = game.Players.LocalPlayer
+Char = Plr.Character
+Torso = Char:FindFirstChild("Torso")
+GetHumanoid = Char:FindFirstChild("Humanoid")
+
+Create = game.ReplicatedStorage.PlayerEvents["e"..Plr.UserId].PlaceItem
+
+L_A = Char["Left Arm"]
+R_A = Char["Right Arm"]
+L_L = Char["Left Leg"]
+R_L = Char["Right Leg"]
+
+local Hint = Instance.new("Hint")
+Hint.Text = "Reset to stop"
+spawn(function()
+	wait(3)
+	Hint:Destroy()
+end)
+	
+	Limbs =
+		{
+		LeftArm = 0;
+		RightArm = 1;
+		LeftLeg = 2;
+		RightLeg = 3
+		}
+
+			Limbs.LeftArm = L_A
+			Limbs.RightArm = R_A
+			Limbs.LeftLeg = L_L
+			Limbs.RightLeg = R_L
+
+function CloneLimbs()
+	LeftArmCoordinate = Limbs.LeftArm.CFrame
+	RightArmCoordinate = Limbs.RightArm.CFrame
+	LeftLegCoordinate = Limbs.LeftLeg.CFrame
+	RightLegCoordinate = Limbs.RightLeg.CFrame
+
+		Create:FireServer(LeftArmCoordinate, Limbs.LeftArm)
+		Create:FireServer(RightArmCoordinate, Limbs.RightArm)
+		Create:FireServer(LeftLegCoordinate, Limbs.LeftLeg)
+		Create:FireServer(RightLegCoordinate, Limbs.RightLeg)
+end
+
+Loop = game.RunService.Heartbeat:Connect(CloneLimbs)
+GetHumanoid.Died:Connect(function() Loop:Disconnect() end)
+end)
+
+GameX.MouseButton1Click:Connect(function()
+	GameFrame.Visible = not GameFrame.Visible
+end)
+
+Players.MouseButton1Click:Connect(function()
+	PlayersFrame.Visible = not PlayersFrame.Visible
+end)
+
+Tools.MouseButton1Click:Connect(function()
+	ToolsFrame.Visible = not ToolsFrame.Visible
+end)
+
+Fun.MouseButton1Click:Connect(function()
+	FunFrame.Visible = not FunFrame.Visible
+end)
+
+Toggle.MouseButton1Click:Connect(function()
+ToggleGuis = not ToggleGuis
+if ToggleGuis == true then
+	GameFrame.Visible = false
+	PlayersFrame.Visible = false
+	ToolsFrame.Visible = false
+	FunFrame.Visible = false
+	Shutdown_2.Visible = false
+	Menu.Visible = true
+	elseif ToggleGuis == false then
+	GameFrame.Visible = false
+	PlayersFrame.Visible = false
+	ToolsFrame.Visible = false
+	FunFrame.Visible = false
+	Shutdown_2.Visible = false
+	Menu.Visible = false
+end
 end)
