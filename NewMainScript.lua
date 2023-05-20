@@ -73,8 +73,8 @@ OtherSection:NewButton("Btools", "Tools To Destroy The Map Or Modules FE", funct
     loadstring(game:HttpGet("https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/B-Tools"))()
 end)
 
-OtherSection:NewButton("Stools", "Tools To Uhhh.. Idk", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/S-tools"))()
+OtherSection:NewButton("Wtools", "Tools To Uhhh.. Idk", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/0123liskigi/HotelElephant/work/W-tools'))()
 end)
 
 OtherSection:NewButton("Infinite Jump", "Lets You Jump Infinitely Without Touching Ground/Grass", function()
